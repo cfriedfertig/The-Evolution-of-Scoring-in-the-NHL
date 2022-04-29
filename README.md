@@ -13,20 +13,48 @@ Download the data. Go to quanthockey.com and select year-by-year (2018-2019, 200
 
 **Second Step** Cleaning the Data
 Open one of the excel sheets:
-Select the entirety of cells 13-52
-  REFERENCE: Look at lefthand side and click your shift button, and then on 13, and then continue to hold onto shift and click 52, then right click and click delete. 
+  Step 1 (Delete the first row): Select 1 on the left side (highlighting the whole row), right click and click delete
+  Step 2 (Delete the bottom 40): Select and Delete the entirety of cells 13-52
+    REFERENCE: Look at lefthand side and click your shift button, and then on 13, and then continue to hold onto shift and click 52, then right click and       click delete. 
+  Step 3 (Delete the useless variabels): Now you need to clear out variables that we won't use. Delete the following columns from the excel file:
+  -PIM, ES, PP, SH, ESG, PPG, SHG, GWG, OTG, ESA, PPA, SHA, GWA, OTA, ESP, PPP, SHP, GWP, OTP, PPP%, G/60, A/60, P/60,  ESG/60, ESA/60, ESP/60, PPG/60,        PPA/60, PPP/60, G/GP, A/GP, P/GP, SH%, Hits, BS, FOW, FOL, FO%
   
-Repeat this step for your other 2 excel sheets. 
-
-Done? Great! Now you have your top ten for that year.
+  Great! Now that you have done this, you can repeat these steps for your other 2 sheets (Tip: It may be easier to throw the top 10 from each year all in     one excel file and do the steps once then reseparate the data to save time!)
 
 **Third Step** Creating a Process
-Open up RapidMiner Studio and create a blank process,
+Open up RapidMiner Studio and create a blank process, save it early and name it referring to the year (i.e. "2018-2019 Model)
 REFERENCE: If you aren't immediately prompted to start a new process, go to "File", "New Process", "Blank Process". Now you are ready to get started.
 
 **Fourth Step** Importing the Dataset
+After creating a new process in RapidMiner, you'll need to import your data. In the top left part of your server, you'll see an option to "Import Data". Click this and select one of your excel sheets. From here, you will want to make sure that you define the header row (the option will pop up when you import the data) as the row that contains the variable names(Rank, GP, G, etc.) and continue moving forward until you get asked where to save your data.
 
+Here, you'll want to select "Local Repository" and then the subfolder "data" so you can easily find it
 
+**Fifth Step** Creating the Model
+First, we retrieved the data for each year
+  HOW TO: Find the dataset in subfolder "data" and drag it into the middle of the process. Congrats! You got your dataset imported!
+
+Second, we used the ”Set Role” function and set points as a label.
+  HOW TO: 
+        1) Go to the operators section in the bottom left corner of the server. Search for "Set Role" and drag it into the process. 
+        2) You will see a small bubble to the right of your retrieved data, click on this and you'll be able to drag it to the "Set Role" operator. You                will want to connect it to the input port labeled "exa" on the left side of it. 
+        3) Click on the "Set Role" operator and look at the options to the right of the process. 
+        4) Change "attribute name" to P (representing Points) and change "target role" to label.
+  
+Third, we used the ”Split Data” function and set enumerations at 0.7 and 0.3 to split the training model from the real model.
+  HOW TO: 
+        1) Go back to the operators section and search for "Split Data" and drag it into the process.
+        2) Similarly to the first connection, connect the exa output of the "Set Role" operator to the exa input of the "Split Data" operator.
+        3) Click on the "Split Data" operator and go to the options to the right of the process.
+        4) Next to partitions, click "Edit Enumerations". From here, you will want to click "add entry" and add 2 entries for 0.7 and 0.3
+           a) This will split the data having 70% of it be in a training set
+        5) 
+  
+Fourth, we connected the ”Split Data” to both a ”Deep Learning” operator and an ”Apply Method” operator sending the higher percentage through a deep learning model.
+  HOW TO: 
+  
+Fifth, we added a performance operator testing for root mean squared error (RMSE) and absolute Error.
+  HOW TO: 
 
 
 
