@@ -47,14 +47,21 @@ Third, we used the ”Split Data” function and set enumerations at 0.7 and 0.3
         2) Similarly to the first connection, connect the exa output of the "Set Role" operator to the exa input of the "Split Data" operator.
         3) Click on the "Split Data" operator and go to the options to the right of the process.
         4) Next to partitions, click "Edit Enumerations". From here, you will want to click "add entry" and add 2 entries for 0.7 and 0.3
-           a) This will split the data having 70% of it be in a training set
-        5) 
+           a) This will split the data having 70% of it be in a training set.
+           
   
 Fourth, we connected the ”Split Data” to both a ”Deep Learning” operator and an ”Apply Method” operator sending the higher percentage through a deep learning model.
   HOW TO: 
+        1) Search operators for "Deep Learning" and "Apply Method" and drag both operators into the process. 
+        2) Connect your first par output from your "Split Data" operator to the tra (short for training) input of the "Deep Learning" operator. 
+        3) Connect your second par output from your "Split Data" operator to the unl input of the "Apply Model" operator.
+        4) Connect your mod output from your "Deep Learning" operator to the mod input of your "Apply Model" operator.
+        
+        You have now successfully split your data into the model.
   
 Fifth, we added a performance operator testing for root mean squared error (RMSE) and absolute Error.
   HOW TO: 
+        1) Search operators for "Performance" and select the "Performance" operator for regression. 
 
 
 
