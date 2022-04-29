@@ -59,11 +59,35 @@ Fourth, we connected the ”Split Data” to both a ”Deep Learning” operator
         
         You have now successfully split your data into the model.
   
-Fifth, we added a performance operator testing for root mean squared error (RMSE) and absolute Error.
+Fifth, we added a "Performance" operator testing for root mean squared error (RMSE) and absolute Error.
   HOW TO: 
         1) Search operators for "Performance" and select the "Performance" operator for regression. 
+        2) Click the "Performance" operator and in the options to the right, select "root mean squared error" and "absolute error".
+            a) This will calculate the error rates of the model
+        3) Connect the lab output of your "Apply Model" operator to the lab input of the "Performance" operator.
+ 
+ Sixth, we added a "Correlation Matrix" operator.
+  HOW TO: 
+        1) Search operators for "Correlation Matrix" and drag it into the process.
+        2) Connect the exa output of the "Performance" operator to the exa input of the "Correlation Matrix" operator
+        
+ LAST Step sending our data through the process:
+        1) For the "Performance" operator:
+          a) Connect the per output to the res input at the right of the process
+        2) For the "Apply Model" operator:
+          b) Connect the mod output to the res input at the right of the process
+        3) For the "Correlation Matrix" operator:
+          c) Connect all three outputs (exa, mat, and wei) to a res input at the right of the process
+          
+          
+ Done? Awesome. Now, click on the play button at the top of the window and it will run your process. It will take you to Results and you can switch between the different results. It should have the following tabs:
+1) AttributeWeights (Correlation Matrix) 
+2) Deep Learning Model (Deep Learning)
+3) ExampleSet (Apply Model)
+4) PerformanceVector (Performance)
+5) Correlation Matrix (Correlation Matrix)
 
-
+Now you have all the data that you need on your machine learning model!
 
 
 
